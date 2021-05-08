@@ -1,0 +1,12 @@
+.registerbox {
+    display: flex;
+    justify-content: center;
+    min-height: 90vh;
+}
+
+.registerform {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+}

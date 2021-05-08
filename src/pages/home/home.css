@@ -1,0 +1,10 @@
+.homebox {
+    display: flex;
+}
+
+.note {
+    padding: 1rem;
+    overflow: auto;
+    background-color: whitesmoke;
+    border-radius: 5px;
+}
