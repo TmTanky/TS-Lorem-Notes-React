@@ -1,10 +1,43 @@
 .homebox {
     display: flex;
+    flex-direction: column;
+    min-height: 90vh;
+}
+
+.hometitle {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0rem;
+}
+
+.mynotes {
+    flex: 5;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.addnote {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0rem 2rem;
 }
 
 .note {
     padding: 1rem;
-    overflow: auto;
+    margin: 0.5rem;
+    height: max-content;
+    width: max-content;
     background-color: whitesmoke;
-    border-radius: 5px;
+    border-radius: 3px;
+}
+
+.addnotebtn {
+    cursor: pointer;
+}
+
+.isdone {
+    display: flex;
+    justify-content: flex-end;
 }
