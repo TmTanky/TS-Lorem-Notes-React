@@ -1,9 +1,27 @@
 nav {
+    display: flex;
     padding: 1rem;
     background-color: #3f50b5;
     font-size: 1.2rem;
 }
 
-nav h3 {
+.navlogo {
+    flex: 1;
+    display: flex;
+    margin: auto;
+}
+
+.navlogo h3 {
     color: white;
+}
+
+.navlinks {
+    flex: 2;
+    display: flex;
+    justify-content: flex-end;
+    margin: auto;
+}
+
+.navlinks p {
+    font-size: 0.9rem;
 }

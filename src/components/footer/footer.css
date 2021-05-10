@@ -1,0 +1,7 @@
+footer {
+    display: flex;
+    justify-content: center;
+    padding: 0.7rem 0rem;
+    background: #3f50b5;
+    color: white;
+}

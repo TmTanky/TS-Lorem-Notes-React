@@ -6,8 +6,10 @@ import { IuserInfo } from '../../interfaces/userInfo'
 // Reducers
 import { userReducer } from './user'
 import { isLoggedInReducer } from './isLoggedIn'
+import { secretReducer } from './secret'
 
-export const root = combineReducers<{user: IuserInfo, isLoggedIn: boolean}>({
+export const root = combineReducers<{user: IuserInfo, isLoggedIn: boolean, secret: boolean | string}>({
     user: userReducer,
-    isLoggedIn: isLoggedInReducer
+    isLoggedIn: isLoggedInReducer,
+    secret: secretReducer
 })

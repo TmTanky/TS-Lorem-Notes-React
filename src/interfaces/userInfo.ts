@@ -7,4 +7,5 @@ export interface IuserInfo {
     email: string
     password: string
     myNotes: Inotes[]
+    pincode: string
 }

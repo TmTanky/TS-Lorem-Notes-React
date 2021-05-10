@@ -52,7 +52,7 @@ export const CreateNoteForm: FC<{setToggle: Function, toggle: boolean, getMyNote
                 <form method="post" className="createnoteform" >
                     <h1 style={{marginBottom: '0.1rem'}}> Create Note </h1>
                     <TextField style={{marginBottom: '0.3rem'}} name="title" label="Title" value={note.title} onChange={handleInputChange} />
-                    <TextareaAutosize name="content" style={{padding: '0.5rem', borderRadius: '0.5px', fontSize: '0.8rem'}} value={note.content} onChange={handleInputChange}  rowsMin={7} placeholder="Content" />
+                    <TextareaAutosize name="content" style={{padding: '0.5rem', borderRadius: '0.5px', fontSize: '0.8rem'}} value={note.content} onChange={handleInputChange} rowsMin={7} placeholder="Content" />
                     
                     <span>
                         <Switch
