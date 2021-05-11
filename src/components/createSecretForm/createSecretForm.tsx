@@ -31,7 +31,7 @@ export const CreateSecretForm: FC<{toggle: boolean, setToggle: Function, getMySe
         
         try {
 
-            await axios.post(`http://localhost:8000/createnote/${userID}`, {note, isSecret}, {
+            await axios.post(`https://ts-lorem-notes-rest.herokuapp.com/createnote/${userID}`, {note, isSecret}, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('token')}`

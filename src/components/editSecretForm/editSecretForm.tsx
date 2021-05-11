@@ -28,7 +28,7 @@ export const EditSecretForm: FC<{id: string, myNotes: Inotes[], toggle: boolean,
 
         try {
 
-            await axios.patch(`http://localhost:8000/editnote/${id}`, editNote, {
+            await axios.patch(`https://ts-lorem-notes-rest.herokuapp.com/editnote/${id}`, editNote, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('token')}`

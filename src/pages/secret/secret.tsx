@@ -33,7 +33,7 @@ export const SecretHome: FC = () => {
 
         try {
 
-            const {data} = await axios.post<{data: Inotes[]}>(`http://localhost:8000/getusersecretnotes/${userID}`, null, {
+            const {data} = await axios.post<{data: Inotes[]}>(`https://ts-lorem-notes-rest.herokuapp.com/getusersecretnotes/${userID}`, null, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -52,7 +52,7 @@ export const SecretHome: FC = () => {
 
         try {
 
-            await axios.delete(`http://localhost:8000/deletenote/${userID}/${noteID}`, {
+            await axios.delete(`https://ts-lorem-notes-rest.herokuapp.com/deletenote/${userID}/${noteID}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('token')}`

@@ -47,7 +47,7 @@ export const RegisterPage: FC = () => {
     
         try {
 
-            const {data} = await axios.post<{data: IuserInfo, msg: string, token: string}>('http://localhost:8000/register', register)
+            const {data} = await axios.post<{data: IuserInfo, msg: string, token: string}>('https://ts-lorem-notes-rest.herokuapp.com/register', register)
             
             if (data.data) {
                 localStorage.setItem('token', data.token)

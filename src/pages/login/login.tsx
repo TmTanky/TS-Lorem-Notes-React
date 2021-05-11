@@ -44,7 +44,7 @@ export const LoginPage: FC = () => {
         
         try {
 
-            const {data} = await axios.post<{data: IuserInfo, msg: string, token: string}>('http://localhost:8000/login', login)
+            const {data} = await axios.post<{data: IuserInfo, msg: string, token: string}>('https://ts-lorem-notes-rest.herokuapp.com/login', login)
 
             if (data.data) {
                 localStorage.setItem('token', data.token)
