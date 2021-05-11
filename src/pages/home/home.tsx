@@ -42,7 +42,12 @@ export const HomePage: FC = () => {
 
         try {
 
-            const {data} = await axios.post<{data: Inotes[]}>(`http://localhost:8000/getusernotes/${userID}`)
+            const {data} = await axios.post<{data: Inotes[]}>(`http://localhost:8000/getusernotes/${userID}`, null, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
 
             if (data.data) {
                 setMyNotes(data.data)
@@ -59,7 +64,12 @@ export const HomePage: FC = () => {
 
         try {
 
-            await axios.patch(`http://localhost:8000/toggledonenote/${noteID}`)
+            await axios.patch(`http://localhost:8000/toggledonenote/${noteID}`, null, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
             await getMyNotes()
 
         } catch (err) {
@@ -72,7 +82,12 @@ export const HomePage: FC = () => {
 
         try {
 
-            await axios.delete(`http://localhost:8000/deletenote/${userID}/${noteID}`)
+            await axios.delete(`http://localhost:8000/deletenote/${userID}/${noteID}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
             await getMyNotes()
 
         } catch (err) {
@@ -129,14 +144,14 @@ export const HomePage: FC = () => {
 
                 <div className="addnote">
                     <Tooltip placement="top" title="Add Note">
-                        <AddCircleRoundedIcon className="addnotebtn" onClick={() => setIsFormOpen(true)} style={{fontSize: '3.5rem', color: 'red'}} />
+                        <AddCircleRoundedIcon className="addnotebtn" onClick={() => setIsFormOpen(true)} style={{fontSize: '3rem', color: 'red'}} />
                     </Tooltip>
                     
                     <Tooltip placement="top" title="Open Secrets">
                         <LockOpenIcon onClick={() => {
                             dispatch(secretPending())
                             history.push('/enterpincode')
-                        }} style={{fontSize: '3.5rem', color: 'black', cursor: 'pointer'}} />
+                        }} style={{fontSize: '3rem', color: 'black', cursor: 'pointer'}} />
                     </Tooltip>
                 </div>
             </div>

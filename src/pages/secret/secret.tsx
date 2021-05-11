@@ -6,8 +6,6 @@ import axios from 'axios'
 import {CircularProgress, Fade, Tooltip} from '@material-ui/core'
 import {AddCircleRounded} from '@material-ui/icons'
 import LockIcon from '@material-ui/icons/Lock';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 
@@ -17,6 +15,8 @@ import { Inotes } from '../../interfaces/notes'
 
 // Redux
 import { secretOff } from '../../redux/actions/actions';
+import { CreateSecretForm } from '../../components/createSecretForm/createSecretForm'
+import { EditSecretForm } from '../../components/editSecretForm/editSecretForm'
 
 export const SecretHome: FC = () => {
 
@@ -24,13 +24,21 @@ export const SecretHome: FC = () => {
     const userID = useSelector<Istate>(state => state.user._id)
 
     const [open, setOpen] = useState(false)
+    const [createNote, setCreateNote] = useState(false)
+    const [selectedID, setSelectedID] = useState("")
+    const [isEdit, setIsEdit] = useState(false)
     const [myNotes, setMyNotes] = useState<Inotes[]>([])
 
     const getMySecretNotes = useCallback(async () => {
 
         try {
 
-            const {data} = await axios.post<{data: Inotes[]}>(`http://localhost:8000/getusersecretnotes/${userID}`)
+            const {data} = await axios.post<{data: Inotes[]}>(`http://localhost:8000/getusersecretnotes/${userID}`, null, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
             setMyNotes(data.data)
             setOpen(true)
 
@@ -40,27 +48,51 @@ export const SecretHome: FC = () => {
 
     },[userID])
 
+    const deleteNote = async (noteID: string) => {
+
+        try {
+
+            await axios.delete(`http://localhost:8000/deletenote/${userID}/${noteID}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            await getMySecretNotes()
+
+        } catch (err) {
+            console.log(err)
+        }
+
+    }
+
     useEffect(() => {
         getMySecretNotes()
     },[getMySecretNotes])
 
     return (
-        <div className="tae" >
+        <div className="mainhome" >
             {open ? <Fade in={open} >
                 <div className="mainhome">
-                    <h1 style={{padding: '3rem 0rem', textAlign: 'center'}} > Secret Notes </h1>
+
+                    <div className="hometitle">
+                        <h1> Secret Notes </h1>
+                    </div>
+
+                    {myNotes.length === 0 ? <h2 style={{textAlign: 'center'}} > No secrets, create one. </h2> : null }
 
                     <div className="mynotes">
                         {myNotes.length > 0 ? myNotes.map(item => {
                             return <div key={item._id} className="note">
 
                             <div className="isdone">
-                                {item.isDone ? <div>
-                                    <DeleteForeverIcon/>
-                                    <CheckBoxIcon/>
-                                </div> : <div>
-                                    <EditIcon/> <CheckBoxOutlineBlankIcon style={{cursor: 'pointer'}}/>
-                                </div> }
+                                <div>
+                                    <EditIcon onClick={() => {
+                                        setSelectedID(item._id)
+                                        setIsEdit(true)
+                                    }} style={{cursor: 'pointer'}} />
+                                    <DeleteForeverIcon onClick={() => deleteNote(item._id)} style={{cursor: 'pointer'}} />
+                                </div>
                             </div>
 
                                 <h2 style={{marginBottom: '0.5rem', borderBottom: 'solid 1px', textDecoration: `${item.isDone ? 'line-through' : ""}`}} > {item.title} </h2>
@@ -71,12 +103,16 @@ export const SecretHome: FC = () => {
 
                     <div className="addnote">
                         <Tooltip placement="top" title="Add Note" >
-                            <AddCircleRounded style={{fontSize: '3.5rem', color: 'red', cursor: 'pointer'}} />
+                            <AddCircleRounded onClick={() => setCreateNote(true)} style={{fontSize: '3rem', color: 'red', cursor: 'pointer'}} />
                         </Tooltip>
                         <Tooltip placement="top" title="Close Secrets" >
-                            <LockIcon onClick={() => dispatch(secretOff())} style={{fontSize: '3.5rem', color: 'black', cursor: 'pointer'}} />
+                            <LockIcon onClick={() => dispatch(secretOff())} style={{fontSize: '3rem', color: 'black', cursor: 'pointer'}} />
                         </Tooltip>
                     </div>
+
+                    {createNote ? <CreateSecretForm getMySecretNotes={getMySecretNotes} toggle={createNote} setToggle={setCreateNote} /> : null}
+                    {isEdit ? <EditSecretForm getMySecretNotes={getMySecretNotes} toggle={isEdit} setToggle={setIsEdit} id={selectedID} myNotes={myNotes} /> : null }
+
                 </div>
             </Fade> : <div className="loading">
             <CircularProgress/>

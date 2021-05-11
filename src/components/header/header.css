@@ -7,19 +7,19 @@ nav {
 
 .navlogo {
     flex: 1;
-    display: flex;
-    margin: auto;
+    margin: auto 0rem;
 }
 
-.navlogo h3 {
+.navlogo h4 {
     color: white;
 }
 
 .navlinks {
-    flex: 2;
+    flex: 1;
     display: flex;
     justify-content: flex-end;
     margin: auto;
+    padding: auto 25rem;
 }
 
 .navlinks p {

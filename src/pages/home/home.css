@@ -11,7 +11,7 @@
     flex: 1;
     display: flex;
     justify-content: center;
-    padding: 1rem 0rem;
+    padding: 3rem 0rem;
 }
 
 .mynotes {
@@ -55,4 +55,10 @@
     display: flex;
     justify-content: center;
     background-color: cadetblue;
+}
+
+@media screen and (max-width: 689px) {
+    .note {
+        width: 95%;
+    }
 }

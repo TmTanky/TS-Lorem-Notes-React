@@ -7,9 +7,9 @@
     flex: 1;
     margin: auto 2rem;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-content: center;
-    align-items: left;
 }
 
 .loginsideintro h1 {
@@ -24,7 +24,24 @@
 
 .loginform {
     display: flex;
+    padding: 4rem 0rem;
     flex-direction: column;
     justify-content: center;
     width: 60%;
+}
+
+@media screen and (max-width: 700px) {
+    .loginbox {
+        flex-direction: column;
+    }
+
+    .loginsideintro {
+        padding: 2rem 0rem;
+        margin: auto 1rem;
+    }
+
+    .loginform {
+        width: 90%;
+    }
+
 }

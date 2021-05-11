@@ -48,12 +48,12 @@ export const EnterPincode: FC = () => {
     }
 
     return (
-        <div className="pincodebox">
-            <form method="post" className="pincodeform" >
+        <div className="createnotebox">
+            <form method="post" className="createnoteform" >
                 <h1 style={{marginBottom: '1rem'}} > Enter PIN code </h1>
 
                 {pincodeError.length > 0 ? pincodeError.map(item => {
-                    return <p key={item} > {item} </p>
+                    return <p style={{color: 'red'}} key={item} > {item} </p>
                 }) : ""}
                 
                 <TextField type="password" value={pincode} label="PIN" onChange={(e: ChangeEvent<HTMLInputElement>) => setPincode(e.target.value) } />

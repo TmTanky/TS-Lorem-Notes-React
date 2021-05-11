@@ -30,9 +30,13 @@ export const EditNoteForm: FC<{toggle: boolean, setToggle: Function, id: string,
 
         try {
 
-            const data = await axios.patch(`http://localhost:8000/editnote/${id}`, editNote)
+            await axios.patch(`http://localhost:8000/editnote/${id}`, editNote, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
             await getMyNotes()
-            console.log(data)
             
         } catch (err) {
             console.log(err)
@@ -44,7 +48,7 @@ export const EditNoteForm: FC<{toggle: boolean, setToggle: Function, id: string,
         <div className="createnotebox">
             <Fade in={toggle} mountOnEnter={true} unmountOnExit={true} >
                 <form className="createnoteform" method="post">
-                <h1 style={{marginBottom: '0.1rem'}}> Edit Note </h1>
+                    <h1 style={{marginBottom: '0.1rem'}}> Edit Note </h1>
                     <TextField value={editNote.title} onChange={handleChange} style={{marginBottom: '0.3rem'}} label="Title" name="title" />
                     <TextareaAutosize value={editNote.content} onChange={handleChange} style={{padding: '0.5rem', borderRadius: '0.5px', fontSize: '0.8rem'}} placeholder="Content" rowsMin={7} name="content" />
                     <Button onClick={async () => {

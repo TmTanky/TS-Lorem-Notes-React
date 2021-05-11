@@ -6,7 +6,9 @@ import {EnterPincode} from '../../components/enterPincode/enterPincode'
 export const PincodeEnter: FC = () => {
 
     return (
-        <EnterPincode/>
+        <div className="enter">
+            <EnterPincode/>
+        </div>
     )
 
 }

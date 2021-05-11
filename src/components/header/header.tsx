@@ -14,11 +14,12 @@ export const Header: FC = () => {
     return (
         <nav>
             <div className="navlogo">
-                <h3> Lorem-Notes </h3>
+                <h4> Lorem-Notes </h4>
             </div>
 
             {isLoggedIn ? <div className="navlinks">
                 <p onClick={() => {
+                    localStorage.removeItem('token')
                     dispatch(logoutUser())
                     dispatch(loginFalse())
                     dispatch(secretOff())

@@ -47,6 +47,7 @@ export const LoginPage: FC = () => {
             const {data} = await axios.post<{data: IuserInfo, msg: string, token: string}>('http://localhost:8000/login', login)
 
             if (data.data) {
+                localStorage.setItem('token', data.token)
                 dispatch(loginUser(data.data))
                 dispatch(loginTrue())
             }
@@ -68,7 +69,7 @@ export const LoginPage: FC = () => {
         <div className="loginbox">
             <div className="loginsideintro">
                 <h1> Create notes and be happy </h1>
-                <p> Lorem ipsum dolor sit amet consectetur. </p>
+                <p> Stay safe and godbless. </p>
             </div>
 
             <div className="loginformbox">

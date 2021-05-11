@@ -27,7 +27,8 @@ export const RegisterPage: FC = () => {
         firstName: "",
         lastName: "",
         email: "",
-        password: ""
+        password: "",
+        pincode: ""
     })
     const [registerError, setRegisterError] = useState<{error: string[]}>({
         error: []
@@ -49,6 +50,7 @@ export const RegisterPage: FC = () => {
             const {data} = await axios.post<{data: IuserInfo, msg: string, token: string}>('http://localhost:8000/register', register)
             
             if (data.data) {
+                localStorage.setItem('token', data.token)
                 dispatch(loginUser(data.data))
                 dispatch(loginTrue())
             }
@@ -102,6 +104,7 @@ export const RegisterPage: FC = () => {
                 <TextField style={{marginBottom: '0.5rem'}} label="Last Name" type="text" onChange={handleChange} value={register.lastName} name="lastName" />
                 <TextField style={{marginBottom: '0.5rem'}} label="Email or Username" type="email" onChange={handleChange} value={register.email} name="email" />
                 <TextField style={{marginBottom: '0.5rem'}} label="Password" type="password" onChange={handleChange} value={register.password} name="password" />
+                <TextField style={{marginBottom: '0.5rem'}} label="PIN" type="password" onChange={handleChange} value={register.pincode} name="pincode" />
 
                 <Button disabled={
                     register.email === "" || register.firstName === "" || register.lastName === "" || register.password === ""
